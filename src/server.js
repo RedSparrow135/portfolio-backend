@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173", // tu React
+  origin: "https://portfolio-backend-production-99fb.up.railway.app", // tu React
 }));
 app.use(express.json());
 
