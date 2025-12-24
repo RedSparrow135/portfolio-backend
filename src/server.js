@@ -1,21 +1,20 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import contactRoutes from "./routes/contact.js";
-
-dotenv.config();
 
 const app = express();
 
 /* FRONTENDS PERMITIDOS */
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://portfolio-backend-production-99fb.up.railway.app"
+  // cuando tengas frontend en prod, lo agregas aquí
+ "https://portfolio-backend-production-99fb.up.railway.app/"
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
+      // Permitir Postman / curl
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
@@ -32,7 +31,9 @@ app.use(
 app.use(express.json());
 app.use("/api/contact", contactRoutes);
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`🚀 Backend corriendo en puerto ${PORT}`);
+/* 🚨 ESTO ES CLAVE EN RAILWAY */
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log("🚀 Backend escuchando en puerto", PORT);
 });
