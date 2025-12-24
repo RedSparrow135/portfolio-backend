@@ -8,7 +8,8 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173", // tu React
+  origin: "https://capv-portfolio.vercel.app", // tu React
+  
 }));
 app.use(express.json());
 
